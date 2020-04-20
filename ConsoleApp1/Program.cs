@@ -1,19 +1,8 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
 using System.Xml;
-using System.Linq;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.XPath;
-using System.IO;
-using System.Net;
-using RestSharp.Serialization.Xml;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
 using System.IdentityModel.Tokens.Jwt;
@@ -38,23 +27,23 @@ namespace ConsoleApp1
 			var xmlDeserializer = new XmlDeserializer();
 			var place = xmlDeserializer.Deserialize<Request>(responseWeather);
 			var temp = xmlDeserializer.Deserialize<Current_condition>(responseWeather);
-			var dit = xmlDeserializer.Deserialize<List<Weather>>(responseWeather);
+			var weather = xmlDeserializer.Deserialize<List<Weather>>(responseWeather);
 
 			
 			
 
-			Console.WriteLine("Vendi: " + place.Query);
-			Console.WriteLine("Temp momentale: " + temp.Temp_C);
+			Console.WriteLine("Place:  " + place.Query);
+			Console.WriteLine("Current Temperature: " + temp.Temp_C);
 			Console.WriteLine("Feel Like: " + temp.FeelsLikeC + "C");
 			Console.WriteLine("");
 			Console.WriteLine("");
 			Console.WriteLine("");
-			Console.WriteLine("Temperatura per ditet e ardhshme");
+			Console.WriteLine("Temperature for 5 next days.");
 		
 			Console.Write("Date		" + "TempMin	" );
 			Console.WriteLine("TempMax");
 
-			foreach (var result in dit)
+			foreach (var result in weather)
 			{
 				Console.WriteLine(result.Date + "      " + result.MintempC +"C" + "	  " + result.MaxtempC + "C");
 			}
